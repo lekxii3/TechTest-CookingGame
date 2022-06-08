@@ -47,5 +47,6 @@ public class AttachPositionApple : MonoBehaviour
     private void CheckExitBool(HoverEnterEventArgs args)
     {
         exitPosition = true; 
+        
     }
 }

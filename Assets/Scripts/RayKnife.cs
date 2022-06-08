@@ -6,13 +6,19 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class RayKnife : MonoBehaviour
 {
+    public delegate void RayKnifeSingal();
+    public RayKnifeSingal rayKnifeSingalLaunch;
+    public InstantiateSliceFood instantiateSliceFood;
+
     public XRGrabInteractable XRGrabInteractable;
+    public XRInteractorLineVisual XRInteractorLineVisual;
     public GameObject HandAccesScript;
-    public XRRayInteractor XRRayInteractor;
-    private Ray ray = new Ray(Vector3.zero, Vector3.right);
-    private RaycastHit hit;
+    //public XRRayInteractor XRRayInteractor;
+    //private Ray ray = new Ray(Vector3.zero, Vector3.right);
+    //private RaycastHit hit;
     private int layerMaskApple = 1 << 10;
     private bool currentActiveRay = false;
+    public bool contactFood =false;
 
     private void Start()
     {
@@ -41,24 +47,26 @@ public class RayKnife : MonoBehaviour
 
     private void DesactivateRay()
     {
-        if (currentActiveRay == true)
+        if (currentActiveRay == false)
         {
-            HandAccesScript.GetComponent<XRRayInteractor>().enabled = true;
+            HandAccesScript.GetComponent<LineRenderer>().enabled = false;
+            HandAccesScript.GetComponent<XRInteractorLineVisual>().enabled = false;
         }
         
     }
 
     private IEnumerator DelayDesactivateRay()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         DesactivateRay();
     }
 
     private void ActivateRay()
     {
-        if (currentActiveRay == false)
+        if (currentActiveRay == true)
         {
-            HandAccesScript.GetComponent<XRRayInteractor>().enabled = false;
+            HandAccesScript.GetComponent<LineRenderer>().enabled = true;
+            HandAccesScript.GetComponent<XRInteractorLineVisual>().enabled = true;
         }
         else
         {
@@ -75,7 +83,7 @@ public class RayKnife : MonoBehaviour
 
     private void CheckDesactivateBool(SelectEnterEventArgs args)
     {
-        Debug.Log("ray desactivate");
+        //Debug.Log("ray desactivate");
         currentActiveRay = false; 
     }
     
@@ -88,7 +96,14 @@ public class RayKnife : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 0.5f,layerMaskApple))
         {
-            Debug.Log("je coupe une pomme");
+            contactFood=true;   
+            instantiateSliceFood.currentOneByOne=true;         
+            rayKnifeSingalLaunch?.Invoke();                     
+        }
+        else
+        {
+            instantiateSliceFood.currentOneByOne=false;   
+            contactFood=false;            
         }
     }
 }

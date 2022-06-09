@@ -5,50 +5,62 @@ using UnityEngine;
 public class InstantiateSliceFood : MonoBehaviour
 {
     public RayKnife rayKnife;
+    public AttachPositionApple attachPositionApple;
     public GameObject[] sliceFood;
     public int indexSliceFood=0;
     public Transform positionToSpawn;
+    public Transform AttachPositionApple;
     public bool currentOneByOne = false;
+    private bool positionOccuped = false;
 
     private void OnEnable() 
     {
         rayKnife.rayKnifeSingalLaunch += InstantiateSliceFoodCheck;
+        attachPositionApple.AttachPositionAppleSignalLaunch += currentOccupation;
     }
 
     private void OnDisable() 
     {
         rayKnife.rayKnifeSingalLaunch -= InstantiateSliceFoodCheck;
+        attachPositionApple.AttachPositionAppleSignalLaunch -= currentOccupation;
     }
 
-    /*private void OnCollisionEnter(Collision other) 
-    {
-        Debug.Log("ça collide1");  
-        if(other.collider.CompareTag("knife"))
-        {
-            Debug.Log("ça collide");            
-            InstantiateSliceFoodCheck();
-            indexSliceFood++;
-        }
-    }*/
-
+    
     private void InstantiateSliceFoodCheck()
-    {        
-        currentOneByOne=false;
+    {                
 
-        if(indexSliceFood < sliceFood.Length-1 && rayKnife.contactFood == true && currentOneByOne == true)
+        if(indexSliceFood <= sliceFood.Length)
         {
-            Instantiate(sliceFood[0],positionToSpawn.position,positionToSpawn.rotation);
+            Instantiate(sliceFood[indexSliceFood],positionToSpawn.position,positionToSpawn.rotation);
         }      
 
-        indexSliceFood++;
-
-        
+        indexSliceFood++;       
         
 
-        if(indexSliceFood == sliceFood.Length-1)
+        if(indexSliceFood == sliceFood.Length)
         {
-            Debug.Log("destroy");
+            Destroy(gameObject);
         }
         
     }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.collider.CompareTag("Hand") && positionOccuped == true)
+        {
+            transform.position = AttachPositionApple.position;
+            transform.rotation = AttachPositionApple.rotation;
+        }    
+    }
+
+    private void currentOccupation()
+    {
+        positionOccuped = true;
+    }
+    
+    // if collide avec collide attach position 
+    // attach position singal launch bool occuped  true
+    // if occuped true ne fait rien. 
+
+
 }

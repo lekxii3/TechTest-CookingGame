@@ -6,8 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class AttachPositionApple : MonoBehaviour
 {
-    public XRRayInteractor XRRayInteractor;
+    public delegate void AttachPositionAppleSignal();
+    public static event AttachPositionAppleSignal AttachPositionAppleSignalLaunch;
+    public XRRayInteractor XRRayInteractor;    
     private bool exitPosition = false;
+    
 
     private void OnEnable()
     {
@@ -23,18 +26,22 @@ public class AttachPositionApple : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("apple") && exitPosition == false)
+        
+        if (other.CompareTag("food") && exitPosition == false)
         {
-            AppleStayPosition();
+            AttachPositionAppleSignalLaunch?.Invoke();
         }
+        
     }
     
     private void AppleStayPosition()
     {
-        GameObject apple = GameObject.FindGameObjectWithTag("apple");
+        positionOccuped = true;
+
+        GameObject food = GameObject.FindGameObjectWithTag("food");
         //Vector3 position = apple.transform.position + transform.up;
-        apple.transform.rotation = transform.rotation;
-        apple.transform.position = transform.position;
+        food.transform.rotation = transform.rotation;
+        food.transform.position = transform.position;
     }
     
     

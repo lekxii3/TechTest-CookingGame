@@ -7,6 +7,7 @@ TagManager:
   - Hand
   - knife
   - apple
+  - food
   layers:
   - Default
   - TransparentFX

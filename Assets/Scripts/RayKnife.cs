@@ -28,7 +28,7 @@ public class RayKnife : MonoBehaviour
     private void Update()
     {
         //Debug.DrawRay(transform.position+transform.forward*0.03f, transform.right+transform.forward*-0.02f, Color.green);
-        RayKnifeContact();
+        //RayKnifeContact();
         //DesactivateRay();
         ActivateRay();
     }
@@ -89,7 +89,7 @@ public class RayKnife : MonoBehaviour
     
     
     
-    private void RayKnifeContact()
+    /*private void RayKnifeContact()
     {
         Ray ray = new Ray(transform.position+transform.forward*0.03f, transform.right+transform.forward*-0.02f);
         RaycastHit hit;
@@ -104,6 +104,14 @@ public class RayKnife : MonoBehaviour
         {
             instantiateSliceFood.currentOneByOne=false;   
             contactFood=false;            
+        }
+    }*/
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.CompareTag("food"))
+        {
+            rayKnifeSingalLaunch?.Invoke();   
         }
     }
 }

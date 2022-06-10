@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Hand
   - knife
-  - apple
   - food
+  - bread
+  - tomato
   layers:
   - Default
   - TransparentFX

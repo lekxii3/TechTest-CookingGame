@@ -4,29 +4,14 @@ using UnityEngine;
 
 public class InstantiateSliceFood : MonoBehaviour
 {
-    public RayKnife rayKnife;
-    public AttachPositionApple attachPositionApple;
+        
     public GameObject[] sliceFood;
     public int indexSliceFood=0;
     public Transform positionToSpawn;
-    public Transform AttachPositionApple;
-    public bool currentOneByOne = false;
-    private bool positionOccuped = false;
 
-    private void OnEnable() 
-    {
-        rayKnife.rayKnifeSingalLaunch += InstantiateSliceFoodCheck;
-        attachPositionApple.AttachPositionAppleSignalLaunch += currentOccupation;
-    }
-
-    private void OnDisable() 
-    {
-        rayKnife.rayKnifeSingalLaunch -= InstantiateSliceFoodCheck;
-        attachPositionApple.AttachPositionAppleSignalLaunch -= currentOccupation;
-    }
 
     
-    private void InstantiateSliceFoodCheck()
+    public void InstantiateSliceFoodCheck()
     {                
 
         if(indexSliceFood <= sliceFood.Length)
@@ -44,19 +29,79 @@ public class InstantiateSliceFood : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //public AttachPositionApple attachPositionApple;
+    //public DetachPosition detachPosition;
+    // public Transform AttachPositionApple;
+    //public bool currentOneByOne = false;
+    //private bool positionOccuped = false;
+
+    /*private void OnEnable() 
     {
+        //RayKnife.rayKnifeSingalLaunch += InstantiateSliceFoodCheck;
+        //attachPositionApple.AttachPositionAppleSignalLaunchOccuped += currentOccupationOccuped;
+        //detachPosition.DetachPositionSignalLaunch += currentOccupeationFree;
+    }
+
+    private void OnDisable() 
+    {
+        //RayKnife.rayKnifeSingalLaunch -= InstantiateSliceFoodCheck;
+        //attachPositionApple.AttachPositionAppleSignalLaunchOccuped -= currentOccupationOccuped;
+        //detachPosition.DetachPositionSignalLaunch -= currentOccupeationFree;
+    }*/
+
+
+   
+
+    /*private void OnCollisionEnter(Collision other) 
+    {
+        Debug.Log("4");
         if(other.collider.CompareTag("Hand") && positionOccuped == true)
         {
+            Debug.Log("5");
             transform.position = AttachPositionApple.position;
             transform.rotation = AttachPositionApple.rotation;
         }    
-    }
+    }*/
 
-    private void currentOccupation()
+
+
+    /*private void test()
     {
+        Debug.Log("4");
+        if(positionOccuped == true)
+        {
+            Debug.Log("5");
+            transform.position = AttachPositionApple.position;
+            transform.rotation = AttachPositionApple.rotation;
+        }    
+    }*/
+   
+
+
+    /*private void currentOccupationOccuped()
+    {
+        Debug.Log("3");
         positionOccuped = true;
     }
+
+    private void currentOccupeationFree()
+    {
+        Debug.Log("8");
+        positionOccuped = false;
+    }*/
     
     // if collide avec collide attach position 
     // attach position singal launch bool occuped  true

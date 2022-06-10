@@ -7,7 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class RayKnife : MonoBehaviour
 {
     public delegate void RayKnifeSingal();
-    public RayKnifeSingal rayKnifeSingalLaunch;
+    public static event RayKnifeSingal rayKnifeSingalTomatoLaunch;
+    public static event RayKnifeSingal rayKnifeSingalBreadLaunch;
     public InstantiateSliceFood instantiateSliceFood;
 
     public XRGrabInteractable XRGrabInteractable;
@@ -88,7 +89,28 @@ public class RayKnife : MonoBehaviour
     }
     
     
-    
+ 
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.CompareTag("tomato"))
+        {
+            rayKnifeSingalTomatoLaunch?.Invoke();   
+        }
+
+        if(other.CompareTag("bread"))
+        {
+            rayKnifeSingalBreadLaunch?.Invoke();   
+        }
+    }
+
+
+
+
+
+
+
+   
     /*private void RayKnifeContact()
     {
         Ray ray = new Ray(transform.position+transform.forward*0.03f, transform.right+transform.forward*-0.02f);
@@ -107,11 +129,7 @@ public class RayKnife : MonoBehaviour
         }
     }*/
 
-    private void OnTriggerEnter(Collider other) 
-    {
-        if(other.CompareTag("food"))
-        {
-            rayKnifeSingalLaunch?.Invoke();   
-        }
-    }
+
+
+
 }

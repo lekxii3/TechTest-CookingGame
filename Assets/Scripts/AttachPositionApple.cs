@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class AttachPositionApple : MonoBehaviour
-{
-    public delegate void AttachPositionAppleSignal();
-    public static event AttachPositionAppleSignal AttachPositionAppleSignalLaunch;
+{   
     public XRRayInteractor XRRayInteractor;    
     private bool exitPosition = false;
     
@@ -22,23 +20,23 @@ public class AttachPositionApple : MonoBehaviour
     {
         XRRayInteractor.hoverEntered.RemoveListener(CheckExitBool);
         XRRayInteractor.hoverExited.RemoveListener(CheckStayBool);
-    }
+    }  
+
 
     private void OnTriggerStay(Collider other)
     {
         
-        if (other.CompareTag("food") && exitPosition == false)
-        {
-            AttachPositionAppleSignalLaunch?.Invoke();
-        }
+        if (other.CompareTag("tomato") && exitPosition == false)
+        {               
+            AppleStayPosition();
+        }               
         
     }
-    
-    private void AppleStayPosition()
-    {
-        positionOccuped = true;
 
-        GameObject food = GameObject.FindGameObjectWithTag("food");
+
+    private void AppleStayPosition()
+    {       
+        GameObject food = GameObject.FindGameObjectWithTag("tomato");
         //Vector3 position = apple.transform.position + transform.up;
         food.transform.rotation = transform.rotation;
         food.transform.position = transform.position;
@@ -47,13 +45,18 @@ public class AttachPositionApple : MonoBehaviour
     
     
     private void CheckStayBool(HoverExitEventArgs args)
-    {
-        exitPosition = false;
+    {  
+        if(args.interactable.CompareTag("tomato"))
+        {
+            exitPosition = false;
+        }
     }
 
     private void CheckExitBool(HoverEnterEventArgs args)
     {
-        exitPosition = true; 
-        
+        if(args.interactable.CompareTag("tomato"))
+        {
+            exitPosition = false;
+        }       
     }
 }

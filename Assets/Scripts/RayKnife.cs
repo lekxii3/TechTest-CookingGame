@@ -5,19 +5,23 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class RayKnife : MonoBehaviour
+    
 {
+    /// <summary>
+	/// Script manage behaviour and event during collision with other gameObject
+	/// </summary>
+
+
     public delegate void RayKnifeSingal();
     public static event RayKnifeSingal rayKnifeSingalTomatoLaunch;
     public static event RayKnifeSingal rayKnifeSingalBreadLaunch;
+    public static event RayKnifeSingal rayKnifeSingalCheeseLaunch;
     public InstantiateSliceFood instantiateSliceFood;
-
     public XRGrabInteractable XRGrabInteractable;
     public XRInteractorLineVisual XRInteractorLineVisual;
     public GameObject HandAccesScript;
-    //public XRRayInteractor XRRayInteractor;
-    //private Ray ray = new Ray(Vector3.zero, Vector3.right);
-    //private RaycastHit hit;
-    private int layerMaskApple = 1 << 10;
+
+    //private int layerMaskApple = 1 << 10;
     private bool currentActiveRay = false;
     public bool contactFood =false;
 
@@ -28,9 +32,7 @@ public class RayKnife : MonoBehaviour
 
     private void Update()
     {
-        //Debug.DrawRay(transform.position+transform.forward*0.03f, transform.right+transform.forward*-0.02f, Color.green);
-        //RayKnifeContact();
-        //DesactivateRay();
+        
         ActivateRay();
     }
 
@@ -77,14 +79,12 @@ public class RayKnife : MonoBehaviour
     }
 
     private void CheckActivateBool(SelectExitEventArgs args)
-    {
-        //Debug.Log("ray activate");
+    {        
         currentActiveRay = true;
     }
 
     private void CheckDesactivateBool(SelectEnterEventArgs args)
-    {
-        //Debug.Log("ray desactivate");
+    {        
         currentActiveRay = false; 
     }
     
@@ -102,10 +102,31 @@ public class RayKnife : MonoBehaviour
         {
             rayKnifeSingalBreadLaunch?.Invoke();   
         }
+
+        if(other.CompareTag("cheese"))
+        {
+            rayKnifeSingalCheeseLaunch?.Invoke();   
+        }
+       
     }
 
 
 
+
+
+
+
+
+
+
+
+    //public XRRayInteractor XRRayInteractor;
+    //private Ray ray = new Ray(Vector3.zero, Vector3.right);
+    //private RaycastHit hit;
+
+    //Debug.DrawRay(transform.position+transform.forward*0.03f, transform.right+transform.forward*-0.02f, Color.green);
+    //RayKnifeContact();
+    //DesactivateRay();
 
 
 

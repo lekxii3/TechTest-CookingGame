@@ -9,6 +9,7 @@ TagManager:
   - food
   - bread
   - tomato
+  - cheese
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - cabbage
   - bread2
   - apple
-  - 
+  - food
   - 
   - 
   - 

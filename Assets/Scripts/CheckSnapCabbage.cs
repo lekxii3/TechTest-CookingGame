@@ -16,7 +16,7 @@ public class CheckSnapCabbage : CheckSnapHeritage
             
             CheckSnapHeritageSignalLaunch?.Invoke();
             DesactivateSignal=false;
-            Debug.Log(gameObject.name);
+            
        }
     }   
 }

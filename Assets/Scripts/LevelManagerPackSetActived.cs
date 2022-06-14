@@ -7,11 +7,23 @@ public class LevelManagerPackSetActived : MonoBehaviour
     public delegate void LevelManagerPackSetActivedSignal();
     public static event LevelManagerPackSetActivedSignal LevelManagerPackSetActivedSignalLaunch;
    [SerializeField]private GameObject[] food;   
+   [SerializeField] private GameObject[] cylinderColorChange;
+   public Material materialGrey;
+   public Material materialGreen;
+   private int indexCylinderColorChange=0;
    
     public GameObject sandwichPrefab;
     public Transform sandwichPrefabToSpawn;
     private int indexArrayFood=0;
     private int NumberCheckPosition=0;
+
+    private void Start() 
+    {
+        foreach (GameObject cylinder in cylinderColorChange)
+        {
+            cylinder.GetComponent<MeshRenderer>().material = materialGrey;
+        }    
+    }
 
     private void FixedUpdate() 
     {
@@ -37,6 +49,8 @@ public class LevelManagerPackSetActived : MonoBehaviour
 
     private void Activate()
     {
+        cylinderColorChange[indexArrayFood].GetComponent<MeshRenderer>().material = materialGreen;
+
         if(indexArrayFood<food.Length)
         {
             food[indexArrayFood].SetActive(true);     

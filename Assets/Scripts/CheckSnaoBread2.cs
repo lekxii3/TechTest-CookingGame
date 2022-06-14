@@ -16,7 +16,7 @@ public class CheckSnaoBread2 : CheckSnapHeritage
             
             CheckSnapHeritageSignalLaunch?.Invoke();
             DesactivateSignal=false;
-            Debug.Log(gameObject.name);
+            
        }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ChechSnapCheese : CheckSnapHeritage
 {
+    /// <summary>
+	/// Script Inheritance before CheckSnapHeritage, assigne to Stocket cheese prefab in assemblage for signal if collider with slice cheese prefab
+	/// </summary>
     public static event CheckSnapHeritageSignal CheckSnapHeritageSignalLaunch;
 
     private void OnTriggerEnter(Collider other) 
@@ -12,6 +15,7 @@ public class ChechSnapCheese : CheckSnapHeritage
        {    
             CheckSnapHeritageSignalLaunch?.Invoke();
             DesactivateSignal=false;
+            Debug.Log(gameObject.name);
        }
     }
 }

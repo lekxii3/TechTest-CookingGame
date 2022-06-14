@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ScaleCabbage : MonoBehaviour
 {
+    /// <summary>
+	/// that small script for change scale to Y axe the cabbage Prefab when that to position over sandwich preparation
+	/// </summary>
+
     public Transform positionAttach;
 
     private void FixedUpdate() 
@@ -19,4 +23,6 @@ public class ScaleCabbage : MonoBehaviour
             transform.localScale = scaleOrigin;
         }
     }    
+
+    
 }

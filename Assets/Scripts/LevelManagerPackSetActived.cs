@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class LevelManagerPackSetActived : MonoBehaviour
 {
+    public delegate void LevelManagerPackSetActivedSignal();
+    public static event LevelManagerPackSetActivedSignal LevelManagerPackSetActivedSignalLaunch;
    [SerializeField]private GameObject[] food;   
-   [SerializeField]private GameObject[] foodSetDesactivate;
+   
     public GameObject sandwichPrefab;
     public Transform sandwichPrefabToSpawn;
     private int indexArrayFood=0;
@@ -21,6 +23,7 @@ public class LevelManagerPackSetActived : MonoBehaviour
         ChechSnapCheese.CheckSnapHeritageSignalLaunch += Activate;
         CheckSnapTomato.CheckSnapHeritageSignalLaunch += Activate;
         CheckSnapCabbage.CheckSnapHeritageSignalLaunch += Activate;
+        CheckSnaoBread2.CheckSnapHeritageSignalLaunch += Activate;
     }
 
     private void OnDisable() 
@@ -29,6 +32,7 @@ public class LevelManagerPackSetActived : MonoBehaviour
         ChechSnapCheese.CheckSnapHeritageSignalLaunch -= Activate;    
         CheckSnapTomato.CheckSnapHeritageSignalLaunch -= Activate;
         CheckSnapCabbage.CheckSnapHeritageSignalLaunch -= Activate;
+        CheckSnaoBread2.CheckSnapHeritageSignalLaunch -= Activate;
     }
 
     private void Activate()
@@ -38,20 +42,15 @@ public class LevelManagerPackSetActived : MonoBehaviour
             food[indexArrayFood].SetActive(true);     
         }                 
         indexArrayFood++;
-        NumberCheckPosition++;       
-
-
+        NumberCheckPosition++;  
         Debug.Log(NumberCheckPosition);
     }
 
     private void InstantiateSanwdich()
     {
-        if(NumberCheckPosition==6)
+        if(NumberCheckPosition==5)
         {
-            for (int i = 0; i < food.Length; i++)
-            {
-                foodSetDesactivate[i].SetActive(false);
-            }
+            LevelManagerPackSetActivedSignalLaunch?.Invoke();
 
             for (int i = 0; i < food.Length; i++)
             {

@@ -6,6 +6,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class AttachPositionCheese : MonoBehaviour
 {
+    /// <summary>
+	/// Script assign to attach position cheese prefab, that do fixe cheese prefab 
+	/// </summary>
     public XRRayInteractor XRRayInteractor;    
     private bool exitPosition = false;
     
@@ -25,20 +28,19 @@ public class AttachPositionCheese : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
         if (other.CompareTag("cheese") && exitPosition == false)
         {               
-            AppleStayPosition();
-        }               
-        
+            AttachCheese();
+        }
     }
 
     
-
-    private void AppleStayPosition()
+    /// <summary>
+	/// method for fixe cheese prefab and is calling if attach cheese prefab collision with that prefab 
+	/// </summary>
+    private void AttachCheese()
     {       
         GameObject food = GameObject.FindGameObjectWithTag("cheese");
-        //Vector3 position = apple.transform.position + transform.up;
         food.transform.rotation = transform.rotation;
         food.transform.position = transform.position;
     }

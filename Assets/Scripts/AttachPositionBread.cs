@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class AttachPositionBread : MonoBehaviour
 {
+    /// <summary>
+	/// Script assign to attach position bread prefab, that do fixe bread prefab 
+	/// </summary>
     public XRRayInteractor XRRayInteractor;    
     private bool exitPosition = false;
     
@@ -24,20 +27,19 @@ public class AttachPositionBread : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
         if (other.CompareTag("bread") && exitPosition == false)
         {               
-            AppleStayPosition();
-        }               
-        
+            AttachBread();
+        } 
     }
 
     
-
-    private void AppleStayPosition()
+    /// <summary>
+	/// method for fixe bread prefab and is calling if attach bread prefab collision with that prefab 
+	/// </summary>
+    private void AttachBread()
     {       
-        GameObject food = GameObject.FindGameObjectWithTag("bread");
-        //Vector3 position = apple.transform.position + transform.up;
+        GameObject food = GameObject.FindGameObjectWithTag("bread");        
         food.transform.rotation = transform.rotation;
         food.transform.position = transform.position;
     }

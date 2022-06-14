@@ -8,22 +8,32 @@ public class RayKnife : MonoBehaviour
     
 {
     /// <summary>
-	/// Script manage behaviour and event during collision with other gameObject
+	/// Script manage behaviour and event during collision with other gameObject && box collider knife check OnTrigger
 	/// </summary>
 
 
     public delegate void RayKnifeSingal();
+    
+    /// <summary>
+	/// event variable launch if collision with prefab CompareTag("tomato")
+	/// </summary>
     public static event RayKnifeSingal rayKnifeSingalTomatoLaunch;
+
+    /// <summary>
+	/// event variable launch if collision with prefab CompareTag("Bread")
+	/// </summary>
     public static event RayKnifeSingal rayKnifeSingalBreadLaunch;
+
+    /// <summary>
+	/// event variable launch if collision with prefab CompareTag("Cheese")
+	/// </summary>
     public static event RayKnifeSingal rayKnifeSingalCheeseLaunch;
     public InstantiateSliceFood instantiateSliceFood;
     public XRGrabInteractable XRGrabInteractable;
     public XRInteractorLineVisual XRInteractorLineVisual;
-    public GameObject HandAccesScript;
-
-    //private int layerMaskApple = 1 << 10;
+    public GameObject HandAccesScript;    
     private bool currentActiveRay = false;
-    public bool contactFood =false;
+    
 
     private void Start()
     {
@@ -31,8 +41,7 @@ public class RayKnife : MonoBehaviour
     }
 
     private void Update()
-    {
-        
+    {        
         ActivateRay();
     }
 
@@ -48,7 +57,18 @@ public class RayKnife : MonoBehaviour
         XRGrabInteractable.selectExited.RemoveListener(CheckActivateBool);
     }
 
-    private void DesactivateRay()
+
+    
+    /// <summary>
+	/// if the controller hand grab the knife prefab, the ray GetComponent<LineRenderer>() is desactivate withe delay. 
+	/// </summary>
+    private IEnumerator DelayDesactivateRay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        DesactivateRay();
+    }
+
+      private void DesactivateRay()
     {
         if (currentActiveRay == false)
         {
@@ -58,12 +78,9 @@ public class RayKnife : MonoBehaviour
         
     }
 
-    private IEnumerator DelayDesactivateRay()
-    {
-        yield return new WaitForSeconds(0.2f);
-        DesactivateRay();
-    }
-
+    /// <summary>
+	/// if the controller hand no longer grab the knife prefab, the ray GetComponent<LineRenderer>() is Activate. 
+	/// </summary>
     private void ActivateRay()
     {
         if (currentActiveRay == true)
@@ -78,6 +95,10 @@ public class RayKnife : MonoBehaviour
         
     }
 
+
+    /// <summary>
+	/// that currentActiveRay is bool for allow choice methode ActivateRay() or DesactivateRay()
+	/// </summary>
     private void CheckActivateBool(SelectExitEventArgs args)
     {        
         currentActiveRay = true;
@@ -90,7 +111,9 @@ public class RayKnife : MonoBehaviour
     
     
  
-
+    /// <summary>
+	/// Event Launch if collision with prefab food 
+	/// </summary>
     private void OnTriggerEnter(Collider other) 
     {
         if(other.CompareTag("tomato"))

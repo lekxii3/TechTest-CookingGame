@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class AttachPositionTomato : MonoBehaviour
-{   
+{    
+    /// <summary>
+	/// Script assign to attach position tomato prefab, that do fixe tomato prefab 
+	/// </summary>
     public XRRayInteractor XRRayInteractor;    
     private bool exitPosition = false;
     
@@ -24,21 +27,20 @@ public class AttachPositionTomato : MonoBehaviour
 
 
     private void OnTriggerStay(Collider other)
-    {
-        
+    {        
         if (other.CompareTag("tomato") && exitPosition == false)
         {               
-            AppleStayPosition();
-        }               
-        
+            AttachTomato();
+        }   
     }
 
     
-
-    private void AppleStayPosition()
+    /// <summary>
+	/// method for fixe tomato prefab and is calling if attach tomato prefab collision with that prefab 
+	/// </summary>
+    private void AttachTomato()
     {       
         GameObject food = GameObject.FindGameObjectWithTag("tomato");
-        //Vector3 position = apple.transform.position + transform.up;
         food.transform.rotation = transform.rotation;
         food.transform.position = transform.position;
     }

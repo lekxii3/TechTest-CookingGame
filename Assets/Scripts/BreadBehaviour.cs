@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BreadBehaviour : InstantiateSliceFood
 {
-    // Start is called before the first frame update
+    /// <summary>
+	/// Script Inheritance before InstantiateSliceFood, assigne to bread prefab for signal if collider with knife prefab
+	/// </summary>
     private void OnEnable() 
     {
         RayKnife.rayKnifeSingalBreadLaunch += InstantiateSliceFoodCheck;

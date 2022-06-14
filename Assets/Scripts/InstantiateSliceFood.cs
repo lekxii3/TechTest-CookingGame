@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InstantiateSliceFood : MonoBehaviour
-{
+{   
+    /// <summary>
+	/// Script for instantiate slice prefab when the script Inheritance from that script event signal launch {TomatoBehaviour,CheeseBehaviour,BreadBehaviour} 
+	/// </summary>
         
     public GameObject[] sliceFood;
     public int indexSliceFood=0;

@@ -29,7 +29,8 @@ public class AttachPositionTomato : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {        
         if (other.CompareTag("tomato") && exitPosition == false)
-        {               
+        {             
+            
             AttachTomato();
         }   
     }
@@ -40,6 +41,7 @@ public class AttachPositionTomato : MonoBehaviour
 	/// </summary>
     private void AttachTomato()
     {       
+        Debug.Log("signal");
         GameObject food = GameObject.FindGameObjectWithTag("tomato");
         food.transform.rotation = transform.rotation;
         food.transform.position = transform.position;

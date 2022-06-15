@@ -69,11 +69,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eedba89378e7de440bfda267b5a4ba1e, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eedba89378e7de440bfda267b5a4ba1e, type: 3}
       propertyPath: m_TagString
-      value: bread
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedba89378e7de440bfda267b5a4ba1e, type: 3}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Colliders: []
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4096
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:

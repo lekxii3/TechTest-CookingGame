@@ -28,9 +28,10 @@ public class AttachPositionCheese : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("cheese") && exitPosition == false)
+        if (other.CompareTag("cheese") && exitPosition==false)
         {               
             AttachCheese();
+            exitPosition = true;
         }
     }
 

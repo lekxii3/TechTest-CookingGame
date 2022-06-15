@@ -27,10 +27,8 @@ public class RayKnife : MonoBehaviour
     /// <summary>
 	/// event variable launch if collision with prefab CompareTag("Cheese")
 	/// </summary>
-    public static event RayKnifeSingal rayKnifeSingalCheeseLaunch;
-    public InstantiateSliceFood instantiateSliceFood;
-    public XRGrabInteractable XRGrabInteractable;
-    public XRInteractorLineVisual XRInteractorLineVisual;
+    public static event RayKnifeSingal rayKnifeSingalCheeseLaunch;   
+    public XRGrabInteractable XRGrabInteractable;    
     public GameObject HandAccesScript;    
     private bool currentActiveRay = false;
     
